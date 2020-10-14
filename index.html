@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Test</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: grid;
+            grid-template: auto 1fr auto / auto 1fr auto;
+            height: 100vh;
+        }
+
+        header {
+            padding: 2rem;
+            grid-column: 1 / 4;
+            background-color: blueviolet;
+            color: white;
+        }
+
+        #sidebar-left {
+            grid-column: 1 / 2;
+            background-color: brown;
+            color: white;
+            padding: 1rem;
+        }
+
+        #main-content {
+            grid-column: 2 / 3;
+            background-color: cadetblue;
+            color: white;
+            padding: 1rem;
+        }
+
+        #sidebar-right {
+            grid-column: 3 / 4;
+            background-color: chocolate;
+            color: white;
+            padding: 1rem;
+        }
+
+        footer {
+            grid-column: 1 / 4;
+            background-color: cyan;
+            padding: 2rem;
+        }
+
+        @media screen and (max-width: 600px) {
+            #sidebar-left {
+                grid-column: 1 / 2;
+                padding: 0;
+            }
+
+            #main-content {
+                grid-column: 2 / 4;
+                grid-row: 2 / 4;
+            }
+
+            #sidebar-right {
+                grid-column: 1 / 2;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body contenteditable="true">
+    <header>This is a header</header>
+    <section id="sidebar-left">Sidebar Left</section>
+    <section id="main-content">Content Main</section>
+    <section id="sidebar-right">Sidebar Right</section>
+    <footer>This is a footer</footer>
+</body>
+</html>
