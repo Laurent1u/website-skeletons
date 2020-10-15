@@ -67,7 +67,7 @@
                 padding: 0;
                 position: absolute;
                 left: 0;
-                width: 45%;
+                width: 50%;
                 height: 100vh;
                 display: none;
                 z-index: 1;
@@ -80,7 +80,7 @@
                 padding: 0;
                 position: absolute;
                 right: 0;
-                width: 45%;
+                width: 50%;
                 height: 100vh;
                 display: none;
                 z-index: 1;
@@ -189,11 +189,12 @@
     });
 
     mainContent.addEventListener('click', e => {
-        if(e.target == mainContent && sideBarLeft.className == 'sidebar-left sidebar-active') {
+        console.log(e.target, sideBarLeft)
+        if(e.target != arrowLeft && sideBarLeft.className == 'sidebar-left sidebar-active') {
             sideBarLeft.classList.remove('sidebar-active');
         }
         
-        if(e.target == mainContent && sideBarRight.className == 'sidebar-right sidebar-active') {
+        if(e.target != arrowRight && sideBarRight.className == 'sidebar-right sidebar-active') {
             sideBarRight.classList.remove('sidebar-active');
         }
     });
