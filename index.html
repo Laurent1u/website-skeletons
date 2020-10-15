@@ -23,7 +23,7 @@
             color: white;
         }
 
-        #sidebar-left {
+        .sidebar-left {
             grid-column: 1 / 2;
             background-color: brown;
             color: white;
@@ -37,7 +37,7 @@
             padding: 1rem;
         }
 
-        #sidebar-right {
+        .sidebar-right {
             grid-column: 3 / 4;
             background-color: chocolate;
             color: white;
@@ -50,24 +50,73 @@
             padding: 2rem;
         }
 
+        .arrow-left, .arrow-right {
+            display: none;
+        }
+
         @media screen and (max-width: 798px) {
-            body {
-                grid-template: auto 1fr auto / minmax(auto, 140px) 1fr minmax(auto, 140px);
-            }
-
-            #sidebar-left {
-                grid-column: 1 / 2;
-                padding: 5px;
-            }
-
             #main-content {
                 grid-column: 2 / 4;
                 grid-row: 2 / 4;
+                padding: 1rem 40px;
+                position: relative;
             }
 
-            #sidebar-right {
+            .sidebar-left {
                 grid-column: 1 / 2;
-                padding: 5px;
+                padding: 0;
+                position: absolute;
+                left: 0;
+                width: 45%;
+                height: 100vh;
+                display: none;
+                z-index: 1;
+                transform: translateX(-100%);
+                transition-duration: 1s;
+            }
+
+            .sidebar-right {
+                grid-column: 1 / 2;
+                padding: 0;
+                position: absolute;
+                right: 0;
+                width: 45%;
+                height: 100vh;
+                display: none;
+                z-index: 1;
+                transform: translateX(100%);
+                transition-duration: 1s;
+            }
+            
+            .arrow-left {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                left: 0;
+                top: 25px;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                border-left: 25px solid brown;
+                display: block;
+            }
+
+            .arrow-right {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                right: 0;
+                top: 25px;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                border-right: 25px solid chocolate;
+                display: block;
+            }
+
+            .sidebar-active {
+                display: block;
+                transform: translateX(0);
             }
         }
     </style>
@@ -77,7 +126,7 @@
         <p>This is a header</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos laborum dolores nam nihil harum sit repellat delectus eius rerum voluptate.</p>
     </header>
-    <section id="sidebar-left">
+    <section class="sidebar-left">
         <p>Sidebar Left</p>
         <p>Lorem ipsum dolor sit amet.</p>
         <p>Lorem ipsum dolor sit.</p>
@@ -99,10 +148,12 @@
         <p>Lorem ipsum dolor sit amet.</p>
     </section>
     <section id="main-content">
+        <span class="arrow-left"></span>
+        <span class="arrow-right"></span>
         <p>Content Main</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quidem excepturi natus porro ipsa aspernatur harum voluptate nostrum officia iusto molestias, laborum exercitationem architecto consectetur ab aliquam cumque obcaecati et! Repellendus error veritatis at omnis nemo nihil voluptatibus odio ipsum, vitae eos voluptates dicta possimus dignissimos excepturi neque aliquam rerum?</p>
     </section>
-    <section id="sidebar-right">
+    <section class="sidebar-right">
         <p>Sidebar Right</p>
         <p>Lorem ipsum dolor sit.</p>
         <p>Lorem, ipsum dolor.</p>
@@ -122,4 +173,29 @@
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, facere.</p>
     </footer>
 </body>
+<script type="text/javascript">
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    const mainContent = document.querySelector('#main-content');
+    const sideBarLeft = document.querySelector('.sidebar-left');
+    const sideBarRight = document.querySelector('.sidebar-right');
+
+    arrowLeft.addEventListener('click', () => {
+        sideBarLeft.classList.add('sidebar-active');
+    });
+
+    arrowRight.addEventListener('click', () => {
+        sideBarRight.classList.add('sidebar-active');
+    });
+
+    mainContent.addEventListener('click', e => {
+        if(e.target == mainContent && sideBarLeft.className == 'sidebar-left sidebar-active') {
+            sideBarLeft.classList.remove('sidebar-active');
+        }
+        
+        if(e.target == mainContent && sideBarRight.className == 'sidebar-right sidebar-active') {
+            sideBarRight.classList.remove('sidebar-active');
+        }
+    });
+</script>
 </html>
